@@ -8,7 +8,7 @@ export default function Login() {
   const [formData, setFormData] = useState({ name: '', email: '', password: '' });
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
-  
+
   const { login, register } = useAuth();
   const navigate = useNavigate();
 
@@ -60,38 +60,38 @@ export default function Login() {
           {isRegister && (
             <div className="animate-[fadeIn_0.3s_ease]">
               <label className="block text-xs font-medium text-vault-text-secondary mb-1.5 uppercase tracking-wide">Full Name</label>
-              <input 
-                type="text" 
+              <input
+                type="text"
                 className="w-full bg-vault-bg-input border border-vault-border rounded-lg px-3.5 py-2.5 text-sm text-vault-text-primary transition-colors focus:outline-none focus:border-vault-primary focus:ring-3 focus:ring-indigo-500/25 placeholder:text-vault-text-muted"
                 placeholder="John Doe"
                 value={formData.name}
-                onChange={e => setFormData({...formData, name: e.target.value})}
-                required 
+                onChange={e => setFormData({ ...formData, name: e.target.value })}
+                required
               />
             </div>
           )}
-          
+
           <div>
             <label className="block text-xs font-medium text-vault-text-secondary mb-1.5 uppercase tracking-wide">Email</label>
-            <input 
-              type="email" 
+            <input
+              type="email"
               className="w-full bg-vault-bg-input border border-vault-border rounded-lg px-3.5 py-2.5 text-sm text-vault-text-primary transition-colors focus:outline-none focus:border-vault-primary focus:ring-3 focus:ring-indigo-500/25 placeholder:text-vault-text-muted"
               placeholder="you@company.com"
               value={formData.email}
-              onChange={e => setFormData({...formData, email: e.target.value})}
-              required 
+              onChange={e => setFormData({ ...formData, email: e.target.value })}
+              required
             />
           </div>
-          
+
           <div>
             <label className="block text-xs font-medium text-vault-text-secondary mb-1.5 uppercase tracking-wide">Password</label>
-            <input 
-              type="password" 
+            <input
+              type="password"
               className="w-full bg-vault-bg-input border border-vault-border rounded-lg px-3.5 py-2.5 text-sm text-vault-text-primary transition-colors focus:outline-none focus:border-vault-primary focus:ring-3 focus:ring-indigo-500/25 placeholder:text-vault-text-muted"
               placeholder="••••••••"
               value={formData.password}
-              onChange={e => setFormData({...formData, password: e.target.value})}
-              required 
+              onChange={e => setFormData({ ...formData, password: e.target.value })}
+              required
             />
           </div>
 
@@ -102,8 +102,8 @@ export default function Login() {
 
         <div className="mt-6 text-center text-sm text-vault-text-muted">
           {isRegister ? 'Already have an account?' : "Don't have an account?"}{' '}
-          <button 
-            type="button" 
+          <button
+            type="button"
             className="text-vault-primary hover:text-vault-primary-hover font-medium hover:underline transition-all"
             onClick={() => { setIsRegister(!isRegister); setError(''); }}
           >

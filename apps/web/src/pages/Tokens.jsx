@@ -14,7 +14,7 @@ export default function Tokens() {
   const [viewMode, setViewMode] = useState('card'); // 'card' | 'table'
   const [isIssueModalOpen, setIsIssueModalOpen] = useState(false);
   const [includeRevoked, setIncludeRevoked] = useState(false);
-  
+
   const tokensFetch = useFetch((incRevoked) => getTokens(incRevoked));
   const keysFetch = useFetch(getVaultKeys);
   const issueFetch = useFetch(issueToken);
@@ -54,8 +54,8 @@ export default function Tokens() {
         </div>
         <div className="flex items-center gap-3">
           <label className="flex items-center gap-2 text-sm text-vault-text-muted cursor-pointer">
-            <input 
-              type="checkbox" 
+            <input
+              type="checkbox"
               checked={includeRevoked}
               onChange={(e) => setIncludeRevoked(e.target.checked)}
               className="accent-vault-primary"
@@ -63,22 +63,24 @@ export default function Tokens() {
             Show revoked
           </label>
           <div className="flex bg-[#0c1019]/60 p-1 rounded-lg border border-vault-border">
-            <button 
+            <button
               className={`p-1.5 rounded transition-all ${viewMode === 'card' ? 'bg-indigo-500/20 text-vault-primary-hover' : 'text-vault-text-muted hover:text-white'}`}
               onClick={() => setViewMode('card')}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z"></path></svg>
             </button>
-            <button 
+            <button
               className={`p-1.5 rounded transition-all ${viewMode === 'table' ? 'bg-indigo-500/20 text-vault-primary-hover' : 'text-vault-text-muted hover:text-white'}`}
               onClick={() => setViewMode('table')}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
             </button>
           </div>
-          <Button variant="primary" onClick={() => setIsIssueModalOpen(true)}>
-            + Issue Token
-          </Button>
+          {vaultKeys.length > 0 && (
+            <Button variant="primary" onClick={() => setIsIssueModalOpen(true)}>
+              + Issue Token
+            </Button>
+          )}
         </div>
       </div>
 
@@ -96,7 +98,11 @@ export default function Tokens() {
                 <div className="col-span-full py-20 text-center text-vault-text-muted bg-white/5 rounded-xl border border-vault-border border-dashed">
                   <div className="text-4xl mb-3">🎫</div>
                   <h3 className="text-vault-text-primary font-medium mb-1">No proxy tokens found</h3>
-                  <p className="text-sm">Click "Issue Token" to create your first proxy token.</p>
+                  {vaultKeys.length > 0 ? (
+                    <p className="text-sm">Click "Issue Token" to create your first proxy token.</p>
+                  ) : (
+                    <p className="text-sm">Add an API key in <a href="/my-keys" className="text-vault-primary-hover hover:underline">My Keys</a> first, then come back to issue tokens.</p>
+                  )}
                 </div>
               ) : (
                 tokens.map(token => (
@@ -108,15 +114,15 @@ export default function Tokens() {
         </>
       )}
 
-      <Modal 
-        isOpen={isIssueModalOpen} 
+      <Modal
+        isOpen={isIssueModalOpen}
         onClose={() => setIsIssueModalOpen(false)}
         title="Issue Proxy Token"
       >
-        <IssueTokenForm 
-          vaultKeys={vaultKeys} 
-          onSubmit={handleIssue} 
-          onCancel={() => setIsIssueModalOpen(false)} 
+        <IssueTokenForm
+          vaultKeys={vaultKeys}
+          onSubmit={handleIssue}
+          onCancel={() => setIsIssueModalOpen(false)}
         />
       </Modal>
     </div>
