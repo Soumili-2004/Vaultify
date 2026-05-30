@@ -93,15 +93,6 @@ export default function Dashboard() {
                   </div>
                 </div>
               </Link>
-              <Link to="/workspace" className="block">
-                <div className="p-4 rounded-lg bg-[#0c1019]/60 border border-vault-border hover:border-vault-primary/30 transition-colors flex items-center gap-3">
-                  <span className="text-xl">👥</span>
-                  <div>
-                    <h4 className="headline-text text-sm font-medium text-vault-text-primary">Invite Member</h4>
-                    <p className="body-text text-xs text-vault-text-muted mt-0.5">Add someone to your workspace</p>
-                  </div>
-                </div>
-              </Link>
             </div>
 
             <div className="mt-8 pt-6 border-t border-vault-border">

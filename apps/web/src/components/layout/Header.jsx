@@ -4,8 +4,6 @@ const pageTitles = {
   '/dashboard': 'Dashboard',
   '/tokens': 'Proxy Tokens',
   '/audit': 'Audit Logs',
-  '/workspace': 'Workspace',
-  '/requests': 'Access Requests',
 };
 
 export default function Header() {

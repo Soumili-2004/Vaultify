@@ -6,8 +6,6 @@ const navItems = [
   { path: '/tokens', label: 'Proxy Tokens', icon: '🎫' },
   { path: '/my-keys', label: 'My Keys', icon: '🔐' },
   { path: '/audit', label: 'Audit Logs', icon: '📋' },
-  { path: '/workspace', label: 'Workspace', icon: '👥' },
-  { path: '/requests', label: 'Access Requests', icon: '🔑' },
 ];
 
 export default function Sidebar() {

@@ -6,8 +6,6 @@ import Login from '../pages/Login';
 import Dashboard from '../pages/Dashboard';
 import Tokens from '../pages/Tokens';
 import AuditLogs from '../pages/AuditLogs';
-import Workspace from '../pages/Workspace';
-import Requests from '../pages/Requests';
 import MyKeys from '../pages/MyKeys';
 
 export default function AppRoutes() {
@@ -18,8 +16,6 @@ export default function AppRoutes() {
       <Route path="/dashboard" element={<ProtectedRoute><Dashboard /></ProtectedRoute>} />
       <Route path="/tokens" element={<ProtectedRoute><Tokens /></ProtectedRoute>} />
       <Route path="/audit" element={<ProtectedRoute><AuditLogs /></ProtectedRoute>} />
-      <Route path="/workspace" element={<ProtectedRoute><Workspace /></ProtectedRoute>} />
-      <Route path="/requests" element={<ProtectedRoute><Requests /></ProtectedRoute>} />
       <Route path="/my-keys" element={<ProtectedRoute><MyKeys /></ProtectedRoute>} />
       
       <Route path="/" element={<Navigate to="/dashboard" replace />} />

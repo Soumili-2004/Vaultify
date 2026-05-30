@@ -21,10 +21,6 @@ const useStore = create((set, get) => ({
 
   setUser: (user) => set({ user }),
 
-  // ─── Workspace ───
-  workspace: null,
-  setWorkspace: (workspace) => set({ workspace }),
-
   // ─── Tokens ───
   tokens: [],
   setTokens: (tokens) => set({ tokens }),
@@ -38,10 +34,6 @@ const useStore = create((set, get) => ({
   auditStats: null,
   setAuditLogs: (auditLogs) => set({ auditLogs }),
   setAuditStats: (auditStats) => set({ auditStats }),
-
-  // ─── Access Requests ───
-  requests: [],
-  setRequests: (requests) => set({ requests }),
 }));
 
 export default useStore;
