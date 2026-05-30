@@ -10,7 +10,7 @@ import { Link } from 'react-router-dom';
 
 export default function Dashboard() {
   const { auditStats, tokens, setAuditStats, setTokens } = useStore();
-  
+
   const statsFetch = useFetch(getAuditStats);
   const tokensFetch = useFetch(() => getTokens(false));
   const logsFetch = useFetch(() => getAuditLogs(1, 5));
@@ -35,27 +35,27 @@ export default function Dashboard() {
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
-        <StatsCard 
-          title="Active Tokens" 
-          value={activeTokens} 
-          icon="🎫" 
-          trend={{ isPositive: true, value: 12 }} 
+        <StatsCard
+          title="Active Tokens"
+          value={activeTokens}
+          icon="🎫"
+          trend={{ isPositive: true, value: 12 }}
         />
-        <StatsCard 
-          title="Total API Calls" 
-          value={auditStats?.totalCalls || 0} 
-          icon="🔄" 
+        <StatsCard
+          title="Total API Calls"
+          value={auditStats?.totalCalls || 0}
+          icon="🔄"
         />
-        <StatsCard 
-          title="Calls Today" 
-          value={auditStats?.callsToday || 0} 
-          icon="📅" 
+        <StatsCard
+          title="Calls Today"
+          value={auditStats?.callsToday || 0}
+          icon="📅"
           trend={{ isPositive: true, value: 5 }}
         />
-        <StatsCard 
-          title="Blocked Requests" 
-          value={auditStats?.blockedToday || 0} 
-          icon="🛡️" 
+        <StatsCard
+          title="Blocked Requests"
+          value={auditStats?.blockedToday || 0}
+          icon="🛡️"
           trend={auditStats?.blockedToday > 0 ? { isPositive: false, value: 'Action Needed' } : null}
         />
       </div>
@@ -69,7 +69,7 @@ export default function Dashboard() {
                 <Button variant="ghost" size="sm">View All</Button>
               </Link>
             </div>
-            
+
             {logsFetch.loading && !recentLogs.length ? (
               <div className="py-10 text-center text-vault-text-muted">Loading activity...</div>
             ) : (
@@ -82,7 +82,7 @@ export default function Dashboard() {
           <div className="glass-card frost-card p-6 relative overflow-hidden group h-full">
             <div className="absolute -top-10 -right-10 w-40 h-40 bg-vault-primary/10 rounded-full blur-3xl"></div>
             <h3 className="headline-text text-lg font-semibold text-vault-text-primary mb-4">Quick Actions</h3>
-            
+
             <div className="space-y-3">
               <Link to="/tokens" className="block">
                 <div className="p-4 rounded-lg bg-[#0c1019]/60 border border-vault-border hover:border-vault-primary/30 transition-colors flex items-center gap-3">
@@ -103,7 +103,7 @@ export default function Dashboard() {
                 </div>
               </Link>
             </div>
-            
+
             <div className="mt-8 pt-6 border-t border-vault-border">
               <h4 className="tag-label text-xs font-semibold text-vault-text-secondary uppercase tracking-wider mb-3">System Health</h4>
               <div className="flex items-center justify-between text-sm">

@@ -12,26 +12,37 @@
   --color-vault-bg-card-hover: rgba(20, 28, 50, 0.8);
   --color-vault-bg-input: rgba(15, 20, 35, 0.9);
   
-  --color-vault-primary: #6366F1;
-  --color-vault-primary-hover: #818CF8;
+  /* Sage Green Theme Colors */
+  --color-vault-primary: #6B9960; /* Sage */
+  --color-vault-primary-hover: #8AB87D; /* Leaf */
   
   --color-vault-glass-bg: rgba(16, 22, 40, 0.55);
-  --color-vault-glass-border: rgba(99, 102, 241, 0.12);
+  --color-vault-glass-border: rgba(138, 184, 125, 0.12); /* Leaf */
   --color-vault-border: rgba(148, 163, 184, 0.08);
-  --color-vault-border-hover: rgba(99, 102, 241, 0.3);
+  --color-vault-border-hover: rgba(138, 184, 125, 0.3); /* Leaf */
   
   --color-vault-text-primary: #F1F5F9;
   --color-vault-text-secondary: #94A3B8;
   --color-vault-text-muted: #64748B;
+
+  /* Override Tailwind's default indigo colors with the Sage Green palette to dynamically swap all component colors */
+  --color-indigo-50: #f4f8f4;
+  --color-indigo-100: #e2ede2;
+  --color-indigo-200: #AACFA0; /* Mist */
+  --color-indigo-300: #8AB87D; /* Leaf */
+  --color-indigo-400: #6B9960; /* Sage */
+  --color-indigo-500: #527A4A; /* Fern */
+  --color-indigo-600: #3D6B3A; /* Moss */
+  --color-indigo-700: #2D4A2D; /* Forest */
 }
 
 @layer base {
   body {
     @apply bg-vault-bg-primary text-vault-text-primary antialiased;
     background-image: 
-      radial-gradient(ellipse 80% 60% at 10% 20%, rgba(99, 102, 241, 0.08), transparent),
+      radial-gradient(ellipse 80% 60% at 10% 20%, rgba(138, 184, 125, 0.08), transparent),
       radial-gradient(ellipse 60% 50% at 80% 80%, rgba(16, 185, 129, 0.06), transparent),
-      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(34, 211, 238, 0.04), transparent);
+      radial-gradient(ellipse 50% 40% at 50% 50%, rgba(170, 207, 160, 0.04), transparent);
     background-attachment: fixed;
     font-family: var(--font-sans);
   }
@@ -62,15 +73,15 @@
     @apply block text-xs font-medium text-vault-text-secondary mb-1.5 uppercase tracking-wide;
   }
 
-  /* Blue ambient glow cards (only applied where .ambient-card is used) */
+  /* Sage green ambient glow cards (only applied where .ambient-card is used) */
   .ambient-card {
-    background: radial-gradient(ellipse at bottom left, rgba(20, 76, 205, 0.35) 0%, rgba(13, 15, 28, 0.97) 65%);
+    background: radial-gradient(ellipse at bottom left, rgba(61, 107, 58, 0.35) 0%, rgba(13, 15, 28, 0.97) 65%);
     box-shadow:
-      inset 0 -80px 60px -30px rgba(27, 63, 149, 0.45),
-      inset 0 -40px 30px -8px #4765ad47,
+      inset 0 -80px 60px -30px rgba(45, 74, 45, 0.45),
+      inset 0 -40px 30px -8px #527a4a47,
       inset 0 -20px 20px -6px rgba(255, 255, 255, 0.10),
-      inset 0 6px 8px -2px rgba(35, 101, 255, 0.10);
-    border: 1px solid rgba(102, 148, 255, 0.18);
+      inset 0 6px 8px -2px rgba(107, 153, 96, 0.10);
+    border: 1px solid rgba(138, 184, 125, 0.18);
     border-radius: 12px;
   }
 
@@ -89,20 +100,20 @@
   }
 
   .ambient-card .trend {
-    color: #7eb3ff !important;
+    color: #AACFA0 !important;
   }
 
-  /* Blue glassmorphism cards (scoped to selected sections only) */
+  /* Sage green glassmorphism cards (scoped to selected sections only) */
   .frost-card {
-    background: #4067c147;
+    background: #D4EBCE47;
     backdrop-filter: blur(18px) saturate(160%);
     -webkit-backdrop-filter: blur(18px) saturate(160%);
-    border: 1px solid rgba(102, 148, 255, 0.25);
+    border: 1px solid rgba(138, 184, 125, 0.25);
     border-radius: 16px;
     box-shadow:
       0 8px 32px rgba(10, 20, 80, 0.45),
       inset 0 1px 0 rgba(255, 255, 255, 0.08),
-      inset 0 -1px 0 rgba(33, 57, 112, 0.3);
+      inset 0 -1px 0 rgba(45, 74, 45, 0.3);
   }
 
   .frost-card .metric-value,

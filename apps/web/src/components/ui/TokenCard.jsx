@@ -7,13 +7,13 @@ export default function TokenCard({ token, onRevoke }) {
   const status = getTokenStatus(token);
   const isRevoked = !!token.revokedAt;
   const isExpired = token.expiresAt && new Date(token.expiresAt) < new Date();
-  
+
   const statusVariant = isRevoked ? 'danger' : isExpired ? 'warning' : 'success';
 
   return (
     <div className="glass-card frost-card p-5 flex flex-col h-full relative overflow-hidden group hover:-translate-y-1 hover:shadow-lg transition-all duration-300">
       {/* Provider Accent Line */}
-      <div 
+      <div
         className="absolute top-0 left-0 w-full h-1 opacity-60 group-hover:opacity-100 transition-opacity"
         style={{ background: provider.color }}
       ></div>
@@ -39,7 +39,7 @@ export default function TokenCard({ token, onRevoke }) {
         <code className="font-mono text-xs text-indigo-200">
           {maskToken(token.tokenString)}
         </code>
-        <button 
+        <button
           className="text-vault-text-muted hover:text-white transition-colors"
           onClick={() => navigator.clipboard.writeText(token.tokenString)}
           title="Copy full token"
@@ -64,9 +64,9 @@ export default function TokenCard({ token, onRevoke }) {
       </div>
 
       {!isRevoked && (
-        <Button 
-          variant="danger" 
-          size="sm" 
+        <Button
+          variant="danger"
+          size="sm"
           className="w-full mt-auto"
           onClick={() => onRevoke(token._id)}
         >
