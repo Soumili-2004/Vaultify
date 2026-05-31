@@ -25,12 +25,25 @@ function verifyToken(token, secret) {
   }
 }
 
+function normalizeIp(ip) {
+  if (!ip) return '';
+  let clean = ip.trim().toLowerCase();
+  if (clean.startsWith('::ffff:')) {
+    clean = clean.substring(7);
+  }
+  if (clean === '::1' || clean === 'localhost') {
+    return '127.0.0.1';
+  }
+  return clean;
+}
+
 function checkTokenBinding(decoded, req) {
   if (!decoded) return { valid: false, reason: 'No token payload' };
 
   if (decoded.ip_hash) {
     const clientIp = (req.headers['x-forwarded-for'] || req.ip || '').split(',')[0].trim();
-    const ipHash = require('crypto').createHash('sha256').update(clientIp).digest('hex').slice(0, 16);
+    const normalizedIp = normalizeIp(clientIp);
+    const ipHash = require('crypto').createHash('sha256').update(normalizedIp).digest('hex').slice(0, 16);
     if (ipHash !== decoded.ip_hash) {
       return { valid: false, reason: 'IP address changed — token binding violated' };
     }

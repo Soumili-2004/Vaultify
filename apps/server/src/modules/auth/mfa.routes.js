@@ -1,12 +1,12 @@
 const express = require('express');
 const { asyncHandler } = require('@vaultify/utils');
-const { requireAuth } = require('@vaultify/auth');
+const { authMiddleware } = require('../../middleware/auth.middleware');
 const mfaService = require('./mfa.service');
 const { User } = require('@vaultify/db');
 
 const router = express.Router();
 
-router.post('/setup', requireAuth, asyncHandler(async (req, res) => {
+router.post('/setup', authMiddleware, asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.userId);
   if (!user) {
     return res.status(404).json({ error: 'NOT_FOUND', message: 'User not found' });
@@ -25,7 +25,7 @@ router.post('/setup', requireAuth, asyncHandler(async (req, res) => {
   });
 }));
 
-router.post('/verify', requireAuth, asyncHandler(async (req, res) => {
+router.post('/verify', authMiddleware, asyncHandler(async (req, res) => {
   const { token } = req.body;
   if (!token) {
     return res.status(400).json({ error: 'VALIDATION', message: 'Token is required' });
@@ -47,7 +47,7 @@ router.post('/verify', requireAuth, asyncHandler(async (req, res) => {
   res.json({ message: 'MFA enabled successfully' });
 }));
 
-router.post('/disable', requireAuth, asyncHandler(async (req, res) => {
+router.post('/disable', authMiddleware, asyncHandler(async (req, res) => {
   const user = await User.findById(req.user.userId);
   if (!user) {
     return res.status(404).json({ error: 'NOT_FOUND', message: 'User not found' });

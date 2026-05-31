@@ -5,14 +5,28 @@ const { signToken } = require('@vaultify/auth');
 const { env } = require('../../config/env');
 const { asyncHandler } = require('@vaultify/utils');
 
+function normalizeIp(ip) {
+  if (!ip) return '';
+  let clean = ip.trim().toLowerCase();
+  if (clean.startsWith('::ffff:')) {
+    clean = clean.substring(7);
+  }
+  if (clean === '::1' || clean === 'localhost') {
+    return '127.0.0.1';
+  }
+  return clean;
+}
+
 function computeBinding(req) {
   const clientIp = (req.headers['x-forwarded-for'] || req.ip || '').split(',')[0].trim();
+  const normalizedIp = normalizeIp(clientIp);
   const ua = req.headers['user-agent'] || '';
   return {
-    ipHash: crypto.createHash('sha256').update(clientIp).digest('hex').slice(0, 16),
+    ipHash: crypto.createHash('sha256').update(normalizedIp).digest('hex').slice(0, 16),
     uaHash: crypto.createHash('sha256').update(ua).digest('hex').slice(0, 16),
   };
 }
+
 
 const register = asyncHandler(async (req, res) => {
   const { email, password, name } = req.body;
